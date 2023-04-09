@@ -1,0 +1,13 @@
+@startuml imluir_state_diagram
+
+state "Not running" as not_running
+state "Package Loaded" as package_loaded
+package_loaded: ""\
+penv = {}\
+""
+state "Server Started" as server_started
+
+not_running --> package_loaded: ""load_all()""
+package_loaded --> server_started: ""serve_web_app()\nqwer""
+
+@enduml

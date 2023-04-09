@@ -1,0 +1,41 @@
+name: Build-Dockerfiles
+on:
+  push:
+    branches:
+      - 'main'
+      - 'master'
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Get Version Tag
+        id: version
+        run: |
+          echo ::set-output name=tag::$(cat DESCRIPTION | grep 'Version: .*' | sed 's/Version: //g')
+      - name: Build and push install-and-run-imlu
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          no-cache: true
+          push: true
+          file: inst/examples/install-and-run-imlui/Dockerfile
+          tags: toscm/install-and-run-imlui:${{steps.version.outputs.tag}},toscm/install-and-run-imlui:latest
+      - name: Build and push install-and-run-imlui-behind-shinyserver
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          no-cache: true
+          push: true
+          file: inst/examples/install-and-run-imlui-behind-shinyserver/Dockerfile
+          tags: toscm/install-and-run-imlui-behind-shinyserver:${{steps.version.outputs.tag}},toscm/install-and-run-imlui-behind-shinyserver:latest

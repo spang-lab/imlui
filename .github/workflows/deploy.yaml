@@ -1,0 +1,25 @@
+name: Deploy Imlui
+on:
+  push:
+    branches: [main, master, fix_github_login]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        envs: GITHUB_REF_NAME
+        script: |
+          env
+          Rscript --version
+          Rscript -e "devtools::install_github(
+            repo = 'toscm/imlui',
+            auth_token = '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',
+            ref = '${GITHUB_REF_NAME}',
+            dependencies = TRUE,
+            upgrade = FALSE
+          )"

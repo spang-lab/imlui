@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="498px" preserveAspectRatio="none" style="width:1002px;height:498px;background:#FFFFFF;" version="1.1" viewBox="0 0 1002 498" width="1002px" zoomAndPan="magnify"><defs/><g><!--MD5=[6326b81c113285a9d7424a8f38b27174]
+cluster Usecases--><g id="cluster_Usecases"><rect height="406" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:1.0;fill:none;" width="989" x="7" y="86.72"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="68" x="467.5" y="103.2532">Usecases</text></g><g id="elem_Upload Data"><ellipse cx="437.7537" cy="299.4707" fill="#F1F1F1" rx="66.7537" ry="15.7507" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="395.7537" y="303.9873">Upload Data</text></g><g id="elem_Generate Predictions"><ellipse cx="892.2471" cy="161.7694" fill="#F1F1F1" rx="88.2471" ry="20.0494" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="134" x="825.2471" y="165.4979">Generate Predictions</text></g><g id="elem_Explain/Visualize Datasets"><ellipse cx="416.8975" cy="161.8995" fill="#F1F1F1" rx="101.3975" ry="22.6795" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="334.8975" y="165.628">Explain/Visualize Datasets</text></g><g id="elem_Explain/Visualize Models"><ellipse cx="184.011" cy="161.9222" fill="#F1F1F1" rx="96.511" ry="21.7022" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153" x="107.511" y="165.6507">Explain/Visualize Models</text></g><g id="elem_Explain/Visualize Predictions"><ellipse cx="661.2046" cy="161.6609" fill="#F1F1F1" rx="107.7046" ry="23.9409" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="178" x="572.2046" y="165.3894">Explain/Visualize Predictions</text></g><g id="elem_Configure User Settings"><ellipse cx="241.1904" cy="299.6581" fill="#F1F1F1" rx="95.1904" ry="21.4381" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="150" x="166.1904" y="303.3866">Configure User Settings</text></g><g id="elem_Configure App Settings"><ellipse cx="214.9382" cy="437.8076" fill="#F1F1F1" rx="93.4382" ry="21.0876" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="146" x="141.9382" y="441.5362">Configure App Settings</text></g><!--MD5=[fee662a292a0353a69bd162820bae93b]
+entity User--><g id="elem_User"><ellipse cx="38" cy="131.22" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M38,139.22 L38,166.22 M25,147.22 L51,147.22 M38,166.22 L25,181.22 M38,166.22 L51,181.22 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="29" x="23.5" y="197.2532">User</text></g><!--MD5=[5f7a6453e063dcbe3e3a052128b27dad]
+entity Authenticated--><g id="elem_Authenticated"><ellipse cx="67" cy="269.22" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M67,277.22 L67,304.22 M54,285.22 L80,285.22 M67,304.22 L54,319.22 M67,304.22 L80,319.22 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="87" x="23.5" y="335.2532">Authenticated</text></g><!--MD5=[97ab183161fd5d1db7fba7485cf76add]
+entity Admin--><g id="elem_Admin"><ellipse cx="67" cy="407.22" fill="#F1F1F1" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/><path d="M67,415.22 L67,442.22 M54,423.22 L80,423.22 M67,442.22 L54,457.22 M67,442.22 L80,457.22 " fill="none" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="39" x="47.5" y="473.2532">Admin</text></g><!--MD5=[6df97b9eb80d0b5aa5524a877f556779]
+link Explain/Visualize Predictions to Generate Predictions--><g id="link_Explain/Visualize Predictions_Generate Predictions"><path d="M768.83,161.72 C778.8,161.72 788.77,161.72 798.74,161.72 " fill="none" id="Explain/Visualize Predictions-to-Generate Predictions" style="stroke:#181818;stroke-width:1.0;stroke-dasharray:7.0,7.0;"/><polygon fill="#181818" points="803.95,161.72,794.95,157.72,798.95,161.72,794.95,165.72,803.95,161.72" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[eba9b021dd8e59870e73e52e08087bec]
+reverse link User to Authenticated--><g id="link_User_Authenticated"><path d="M50.35,220.62 C53.2,234.02 56.18,247.96 58.81,260.29 " fill="none" id="User-backto-Authenticated" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="43.48,221.99,46.16,200.97,57.17,219.07,43.48,221.99" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f8b34e49e3a6669eaf345abe92346717]
+reverse link Authenticated to Admin--><g id="link_Authenticated_Admin"><path d="M67,359.09 C67,372.35 67,386.11 67,398.29 " fill="none" id="Authenticated-backto-Admin" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="none" points="60,358.97,67,338.97,74,358.97,60,358.97" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d7c826f17a5452b1346da3155069f0c9]
+link User to Generate Predictions--><g id="link_User_Generate Predictions"><path d="M43.2,122.62 C49.04,96.28 61.41,63.71 87.5,48.72 C153.11,11.03 697.97,21.32 768.5,48.72 C814.27,66.5 853.42,110.03 874.75,137.58 " fill="none" id="User-to-Generate Predictions" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="878.02,141.86,875.738,132.2792,874.9859,137.8858,869.3793,137.1337,878.02,141.86" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[64bd05f1374cb6c15c64dd2fa83dc9e5]
+link User to Explain/Visualize Datasets--><g id="link_User_Explain/Visualize Datasets"><path d="M43.2,122.62 C49.04,96.28 61.41,63.71 87.5,48.72 C161.88,6 199.8,19.65 280.5,48.72 C328.23,65.91 371.1,107.84 395.57,135.5 " fill="none" id="User-to-Explain/Visualize Datasets" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="399.05,139.48,396.1363,130.072,395.7585,135.7162,390.1143,135.3384,399.05,139.48" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d36af482a7ebe6c9d44c4e78d67bf518]
+link User to Explain/Visualize Models--><g id="link_User_Explain/Visualize Models"><path d="M52.54,161.72 C62.45,161.72 72.37,161.72 82.28,161.72 " fill="none" id="User-to-Explain/Visualize Models" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="87.46,161.72,78.46,157.72,82.46,161.72,78.46,165.72,87.46,161.72" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[84c0b3feed7a68bd0578a9059b2a5e44]
+link User to Explain/Visualize Predictions--><g id="link_User_Explain/Visualize Predictions"><path d="M43.2,122.62 C49.04,96.28 61.41,63.71 87.5,48.72 C129.03,24.87 473.28,32.97 518.5,48.72 C566.81,65.55 611.05,106.34 637.02,134.02 " fill="none" id="User-to-Explain/Visualize Predictions" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="640.72,138.01,637.5215,128.695,637.3156,134.3481,631.6624,134.1421,640.72,138.01" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a70d5bcda54108e72e3f568f3c09f615]
+link Authenticated to Upload Data--><g id="link_Authenticated_Upload Data"><path d="M101.3,260.47 C114.14,248.57 129.72,236.99 146.5,230.72 C225.61,201.18 255.79,205.88 336.5,230.72 C367.93,240.39 398.35,263.48 417.56,280.29 " fill="none" id="Authenticated-to-Upload Data" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="421.72,283.99,417.6529,275.0201,417.9837,280.6673,412.3366,280.9981,421.72,283.99" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[e99ea96f29e2af871355f3c883f51508]
+link Authenticated to Configure User Settings--><g id="link_Authenticated_Configure User Settings"><path d="M110.84,299.72 C120.8,299.72 130.76,299.72 140.71,299.72 " fill="none" id="Authenticated-to-Configure User Settings" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="145.92,299.72,136.92,295.72,140.92,299.72,136.92,303.72,145.92,299.72" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[9df4079c8a2deaad71212f5c9c9ca3e6]
+link Admin to Configure App Settings--><g id="link_Admin_Configure App Settings"><path d="M86.66,437.72 C96.55,437.72 106.44,437.72 116.33,437.72 " fill="none" id="Admin-to-Configure App Settings" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="121.5,437.72,112.5,433.72,116.5,437.72,112.5,441.72,121.5,437.72" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[dc041a987ab87ba3dae055536abf94df]
+@startuml imlui_usescases_diagram
+rectangle Usecases {
+    ' Usescases
+    (Upload Data)
+    (Generate Predictions)
+    (Explain/Visualize Datasets)
+    (Explain/Visualize Models)
+    (Explain/Visualize Predictions)
+    (Configure User Settings)
+    (Configure App Settings)
+    (Explain/Visualize Predictions) .> (Generate Predictions)
+    ' Actors
+    :User:
+    :Authenticated:
+    :Admin:
+    User <|- - Authenticated
+    Authenticated <|- - Admin
+    ' Relationships
+    User -> (Generate Predictions)
+    User -> (Explain/Visualize Datasets)
+    User -> (Explain/Visualize Models)
+    User -> (Explain/Visualize Predictions)
+    Authenticated -> (Upload Data)
+    Authenticated -> (Configure User Settings)
+    Admin -> (Configure App Settings)
+}
+@enduml
+
+@startuml imlui_usescases_diagram
+rectangle Usecases {
+    (Upload Data)
+    (Generate Predictions)
+    (Explain/Visualize Datasets)
+    (Explain/Visualize Models)
+    (Explain/Visualize Predictions)
+    (Configure User Settings)
+    (Configure App Settings)
+    (Explain/Visualize Predictions) .> (Generate Predictions)
+    :User:
+    :Authenticated:
+    :Admin:
+    User <|- - Authenticated
+    Authenticated <|- - Admin
+    User -> (Generate Predictions)
+    User -> (Explain/Visualize Datasets)
+    User -> (Explain/Visualize Models)
+    User -> (Explain/Visualize Predictions)
+    Authenticated -> (Upload Data)
+    Authenticated -> (Configure User Settings)
+    Admin -> (Configure App Settings)
+}
+@enduml
+
+PlantUML version 1.2022.5(Sat Apr 30 12:55:52 CEST 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: US
+--></g></svg>

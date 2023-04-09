@@ -1,0 +1,15 @@
+{
+  "name": "imlui-js",
+  "version": "1.0.0",
+  "description": "Javascript for R package imlui",
+  "main": "imlui.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tobias Schmidt",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "jquery": "^3.6.3",
+    "js-cookie": "^3.0.1"
+  }
+}

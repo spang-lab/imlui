@@ -1,0 +1,17 @@
+@startuml
+title User opens Website
+
+start
+
+partition "Server Func" {
+    :ses = {input, output, session, db, const, rv, r, hndl}>
+}
+partition "Startup Events" {
+    :hndl_oauth_github(ses)>
+    :hndl_oauth_auth_spang_lab(ses)>
+    :hndl_oauth_google(ses)>
+    :hndl_oauth_gitlab(ses)>
+    :hndl_oauth_gitlab_spang_lab(ses)>
+}
+
+@enduml

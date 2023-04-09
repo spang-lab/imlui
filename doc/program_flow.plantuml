@@ -1,0 +1,49 @@
+' + Admin connects to hostmachine
+' + Admin starts R
+' + Admin calls `devtools::load_all()` or `library(imlui)` from R
+'   - Environment [penv](#penv) is created
+' + Admin calls `serve_web_app()`
+'   + HTTPUV HTTP Server is started
+'   + HTTPUV Websocket Server is started
+'   + The following members of [penv](#penv) are initialized:
+'     + [imlui_config](#imlui_config)
+'     + [snr](#snr)
+'     + [db](#db)
+' + User requests website via browser
+'   + Webserver requests execution of UI function from R process
+'   + R process executes [web_app_ui](#iml_ui) and sends back generated HTML code of landing page (LP) to HTTPUV
+'   + In parallel (hopefully):
+'     + HTTPUV sends back LP to browser
+'       + Browser executes code from `shiny.js` javascript library within LP:
+'         + Browser establishes connection with websocket server
+'         + Browser sends values of cookies over websocket to HTTPUV
+'         + Browser enters event loop. While TRUE:
+'           + Browser sends current values of input widgets and cookies over websocket to HTTPUV
+'           + HTTPUV sends 
+'     + R process executes server function [web_app_server](#web_app_server)
+'       + 
+' + Return UI
+' + Register Server Function
+'   + Create [ses](#ses)
+'   + Init input, output, session, db, const, rv, r and hndl inside [ses](#ses)
+' + Establish Websocket connection
+@startuml Program Flow
+actor "Public User" as public_user
+actor "Authenticated User" as authenticated_user
+actor "Admin" as admin
+participant "R Process" as r
+participant "Httpuv Webserver" as httpuv
+participant "Browser" as browser
+database Database as Foo5
+collections
+
+collections Collections as Foo6
+queue       Queue       as Foo7
+Foo -> Foo1 : To actor 
+Foo -> Foo2 : To boundary
+Foo -> Foo3 : To control
+Foo -> Foo4 : To entity
+Foo -> Foo5 : To database
+Foo -> Foo6 : To collections
+Foo -> Foo7: To queue
+@enduml

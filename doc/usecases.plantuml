@@ -1,0 +1,28 @@
+@startuml usecases
+left to right direction
+' Actors
+:User:
+:Authenticated:
+:Admin:
+Authenticated -up-> User
+Admin -up-> Authenticated
+' Usecases
+rectangle Usecases {
+    (Upload Data)
+    (Generate Predictions)
+    (Explain/Visualize Datasets)
+    (Explain/Visualize Models)
+    (Explain/Visualize Predictions)
+    (Configure User Settings)
+    (Configure App Settings)
+    (Explain/Visualize Predictions) .> (Generate Predictions)
+}
+' Relationships
+User -> (Generate Predictions)
+User -> (Explain/Visualize Datasets)
+User -> (Explain/Visualize Models)
+User -> (Explain/Visualize Predictions)
+Authenticated -> (Upload Data)
+Authenticated -> (Configure User Settings)
+Admin -> (Configure App Settings)
+@enduml
