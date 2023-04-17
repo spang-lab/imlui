@@ -38,12 +38,12 @@ jobs:
           needs: |
             check
             coverage
-      - name: Test coverage
-        run: covr::codecov(quiet = FALSE)
-        shell: Rscript {0}
+      # - name: Test coverage
+      #   run: covr::codecov(quiet = FALSE)
+      #   shell: Rscript {0}
       - name: Test R CMD check
         uses: r-lib/actions/check-r-package@v2
-        with:
-          upload-snapshots: true
+        # with:
+        #   upload-snapshots: true
 
 
