@@ -8,14 +8,14 @@ IMLUI (Interpretable Machine Learning User Interface) is an R package that makes
 
 Some of the cool features that IMLUI provides are:
 
-* [Responsive design](Layout), i.e. it works on mobile devices as well as on traditional monitors.
+* [Responsive design](https://github.com/spang-lab/imlui/wiki/User-Interface), i.e. it works on mobile devices as well as on traditional monitors.
 * Fast response times due to process wide caching of models and datasets
 * Possibility to handle [Authentication] through 3rd party Identity providers
-* Fine grained [permission system](Authentication#external-user-authorization) for models, datasets, pages and methods
-* Possibility to [bookmark](Bookmarking) the exact state of each page
+* Fine grained [permission system](https://github.com/spang-lab/imlui/wiki/Authentication#internal-authorization) for models, datasets, pages and methods
+* Possibility to [bookmark](https://github.com/spang-lab/imlui/wiki/Bookmarking) the exact state of each page
 * Easy [Installation] and [Configuration] procedure
 
-For a more detailed overview of IMLUI, have a look at [IMLUi's Wiki](github.com/spang-lab/imlui/wiki).
+For a more detailed overview of IMLUI, have a look at [IMLUi's Wiki](https://github.com/spang-lab/imlui/wiki).
 
 ## Installation
 
@@ -24,7 +24,7 @@ For a more detailed overview of IMLUI, have a look at [IMLUi's Wiki](github.com/
 Installation of imlui consists of the following steps:
 
 1. Install [R](https://cran.r-project.org/)
-2. Linux/MacOS only: install the dependencies listed in [Dependencies]([#dependencies](https://github.com/spang-lab/imlui/wiki/Installation#dependencies))
+2. Linux/MacOS only: install the dependencies listed in [Dependencies](https://github.com/spang-lab/imlui/wiki/Installation#dependencies)
 3. Install imlui by entering the following commands in an R session:
    ```R
    if (!"devtools" %in% installed.packages()[, "Package"]) {
@@ -47,4 +47,4 @@ Congratulations! Now imlui is served on port 8080 of your local PC. That means, 
 
 ## What's next?
 
-For more details on IMLUI, such as usage examples, configuration guidelines or internal implementation details, have a look at [IMLUi's Wiki](github.com/spang-lab/imlui/wiki).
+For more details on IMLUI, such as usage examples, configuration guidelines or internal implementation details, have a look at [IMLUi's Wiki](https://github.com/spang-lab/imlui/wiki).

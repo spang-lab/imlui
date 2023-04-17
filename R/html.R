@@ -21,11 +21,6 @@ html__tab__settings <- function(ses,
                                 tbl_name,
                                 cols_ignore = c(),
                                 cols_show = "_all") {
-  # if (is.null(cols_show)) {
-  #   cols_show <- colnames(tbl)
-  # }
-  # cols <- setdiff(cols_show, cols_ignore)
-  # browser()
 
   tbl <- db__get_table(tbl_name)
   tbl_id <- paste0("tbl_", tbl_name)
