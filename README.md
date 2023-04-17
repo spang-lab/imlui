@@ -30,10 +30,7 @@ Installation of imlui consists of the following steps:
    if (!"devtools" %in% installed.packages()[, "Package"]) {
      install.packages(pkgs = "devtools", repos = c(CRAN = "https://cloud.r-project.org"))
    }
-   devtools::install_github(
-     repo = "toscm/imlui",
-     auth_token = "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"
-   )
+   devtools::install_github(repo = "spang-lab/imlui")
    ```
 
 For details on how to start the IMLUI webapp after Installation see [Usage].
