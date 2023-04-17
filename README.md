@@ -1,7 +1,7 @@
 # IMLUI <img src="inst/assets/png/imlui_logo.png" align="right" width="100"/>
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/toscm/imlui/workflows/R-CMD-check/badge.svg)](https://github.com/toscm/imlui/actions)
+[![R-CMD-check](https://github.com/spang-lab/imlui/workflows/R-CMD-check/badge.svg)](https://github.com/spang-lab/imlui/actions)
 <!-- badges: end -->
 
 IMLUI (Interpretable Machine Learning User Interface) is an R package that makes it possible to share your datasets and/or statistical models via a nice and shiny web interface. Users of the web interface will not only be able to view and apply your models, but also to create additional visualizations and explanations to make the result of a classification more understandable.
@@ -15,7 +15,7 @@ Some of the cool features that IMLUI provides are:
 * Possibility to [bookmark](Bookmarking) the exact state of each page
 * Easy [Installation] and [Configuration] procedure
 
-For a more detailed overview of IMLUI, have a look at [IMLUi's Wiki](github.com/toscm/dummy/wiki).
+For a more detailed overview of IMLUI, have a look at [IMLUi's Wiki](github.com/spang-lab/imlui/wiki).
 
 ## Installation
 
@@ -24,7 +24,7 @@ For a more detailed overview of IMLUI, have a look at [IMLUi's Wiki](github.com/
 Installation of imlui consists of the following steps:
 
 1. Install [R](https://cran.r-project.org/)
-2. Linux/MacOS only: install the dependencies listed in [Dependencies]([#dependencies](https://github.com/toscm/dummy/wiki/Installation#dependencies))
+2. Linux/MacOS only: install the dependencies listed in [Dependencies]([#dependencies](https://github.com/spang-lab/imlui/wiki/Installation#dependencies))
 3. Install imlui by entering the following commands in an R session:
    ```R
    if (!"devtools" %in% installed.packages()[, "Package"]) {
@@ -47,4 +47,4 @@ Congratulations! Now imlui is served on port 8080 of your local PC. That means, 
 
 ## What's next?
 
-For more details on IMLUI, such as usage examples, configuration guidelines or internal implementation details, have a look at [IMLUi's Wiki](github.com/toscm/dummy/wiki).
+For more details on IMLUI, such as usage examples, configuration guidelines or internal implementation details, have a look at [IMLUi's Wiki](github.com/spang-lab/imlui/wiki).
