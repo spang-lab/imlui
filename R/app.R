@@ -102,7 +102,7 @@ web_app_server <- function(input, output, session) {
 }
 
 
-web_app_ui <- function(request) {
+web_app_ui <- function(request) { 
   # See README/#ui-layout for an overview
   trace_func_entry()
   tagList(
@@ -114,7 +114,7 @@ web_app_ui <- function(request) {
       title = "IML-UI",
       imlui_js(), # Loads js/css files from <imlui>/assets/js
       uiOutput(outputId = "landing_page"),
-      theme = shinythemes::shinytheme("cerulean"),
+      # theme = shinythemes::shinytheme("cerulean"),
       NULL
       # Valid themes are:
       # cerulean: ok, but navbar too bright

@@ -1,0 +1,26 @@
+---
+title: "Dependencies"
+---
+
+Installation of imlui on Linux and MacOS requires a set of libraries to be available on your system. The names of the required libraries depend on the used package manager. Below you can see a list of supported package managers:
+
+| PM   | OS                   |
+| ---- | -------------------- |
+| deb  | Debian, Ubuntu, Mint |
+| rpm  | Fedora, Amazon Linux |
+| brew | MacOS                |
+
+The required set of installation commands for each package manager is shown in the following:
+
+```bash
+# deb
+sudo apt update
+sudo apt install -y libpq-dev libssl-dev libsodium-dev
+
+# rpm
+sudo yum update
+sudo yum install -y postgresql-devel openssl-devel libsodium-devel
+
+# brew
+brew install libpq openssl libsodium
+```

@@ -8,6 +8,8 @@ Authors@R:
            email = "tobias.schmidt331@gmail.com")
 Description: Provides a grafical user interface (GUI) and a commandline interface (CLI) to interactively explore interpretable machine learning (IML) methods.
 License: MIT + file LICENSE
+URL: https://github.com/spang-lab/imlui, https://github.com/spang-lab/imlui/wiki
+BugReports: https://github.com/r-lib/pkgdown/issues
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
@@ -59,3 +61,4 @@ Remotes:
     toscm/toscutil,
     toscm/toscmask,
     r-lib/lintr
+Config/Needs/website: rmarkdown

@@ -26,7 +26,7 @@ ui__tab__user_profile <- function(ses) {
 
 
 ui__tab__user_settings <- function(ses) {
-  ses$output$tbl_settings <- render__tbl(ses$rv$tbl$settings)
+  ses$output$tbl_settings <- render__tbl(db__get_table("settings"))
   div(
     class = "container-fluid imlui-full-height",
     fluidRow(

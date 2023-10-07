@@ -49,19 +49,44 @@ render__tbl <- function(expr, show = "_all", ignore = character()) {
     which(colnames(expr) %in% show) - 1
   }
   colvis <- which(colnames(expr)[colvis + 1] %notin% ignore) - 1
+  # JS code for key-press handling. Taken from:
+  # https://laustep.github.io/stlahblog/posts/DTcallbacks.html
+  js <- c(
+    "table.on('key', function(e, datatable, key, cell, originalEvent){",
+    "  var targetName = originalEvent.target.localName;",
+    "  if(key == 13 && targetName == 'body'){",
+    "    $(cell.node()).trigger('dblclick.dt');",
+    "  }",
+    "});",
+    "table.on('keydown', function(e){",
+    "  var keys = [9,13,37,38,39,40];",
+    "  if(e.target.localName == 'input' && keys.indexOf(e.keyCode) > -1){",
+    "    $(e.target).trigger('blur');",
+    "  }",
+    "});",
+    "table.on('key-focus', function(e, datatable, cell, originalEvent){",
+    "  var targetName = originalEvent.target.localName;",
+    "  var type = originalEvent.type;",
+    "  if(type == 'keydown' && targetName == 'input'){",
+    "    if([9,37,38,39,40].indexOf(originalEvent.keyCode) > -1){",
+    "      $(cell.node()).trigger('dblclick.dt');",
+    "    }",
+    "  }",
+    "});"
+  )
   DT::renderDT(
     # documentation: https://rstudio.github.io/DT/
     # args: https://cran.r-project.org/web/packages/DT/DT.pdf
     # options: https://datatables.net/reference/option/
     expr = expr,
     server = TRUE,
-    editable = list(
-      target = "cell",
-      disable = list(columns = c(0))
-    ),
+    editable = list(target = "cell", disable = list(columns = c(0))),
+    callback = htmlwidgets::JS(js),
+    extensions = "KeyTable",
     selection = "none",
     rownames = FALSE,
     options = list(
+      keys = TRUE,
       scrollX = FALSE,
       scrollY = "auto", # "max(100vh - 280px, 400px)"
       scrollCollapse = TRUE,

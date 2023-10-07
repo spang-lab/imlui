@@ -95,10 +95,6 @@ init__hndl <- function(ses) {
 
 init__r <- function(input, output, session, const, rv) {
   trace_func_entry("init__r")
-  model <- init_rs_model(input, rv) # ok: unit test exists
-  dataset <- init_rs_dataset(input, rv) # ok: unit test exists
-  size <- init_rs_size(input) # ok: unit test exists
-  prediction <- init_rs_prediction(rv) # todo
   return(toscutil::function_locals())
 }
 
@@ -129,32 +125,6 @@ init__rv <- function(db) {
     gitlab_spang_lab = FALSE
   )
   tbl <- reactiveValues(
-    users = `rownames<-`(x <- db__get_table("users"), x[["id"]]),
-    models = `rownames<-`(x <- db__get_table("models"), x[["id"]]),
-    datasets = `rownames<-`(x <- db__get_table("datasets"), x[["id"]]),
-    papers = `rownames<-`(x <- db__get_table("papers"), x[["id"]]),
-    settings = `rownames<-`(x <- db__get_table("settings"), x[["id"]]),
-    # appstate = `rownames<-`(x <- db__get_table("appstate"), x[["id"]]),
-    # samples = `rownames<-`(x <- db__get_table("samples"), x[["id"]]),
-    # modeltypes = `rownames<-`(x <- db__get_table("modeltypes"), x[["id"]]),
-    # datatypes = `rownames<-`(x <- db__get_table("datatypes"), x[["id"]]),
-    # methods = `rownames<-`(x <- db__get_table("methods"), x[["id"]]),
-    # platforms = `rownames<-`(x <- db__get_table("platforms"), x[["id"]]),
-    mapping_users_groups = db__get_table("mapping_users_groups"),
-    mapping_users_settings = db__get_table("mapping_users_settings"),
-    mapping_users_models = db__get_table("mapping_users_models"),
-    mapping_users_datasets = db__get_table("mapping_users_datasets"),
-    # mapping_users_resources = db__get_table("mapping_users_resources"),
-    mapping_users_sessions = db__get_table("mapping_users_sessions"),
-    mapping_groups_settings = db__get_table("mapping_groups_settings"),
-    mapping_groups_models = db__get_table("mapping_groups_models"),
-    mapping_groups_datasets = db__get_table("mapping_groups_datasets"),
-    # mapping_groups_resources = db__get_table("mapping_groups_resources"),
-    mapping_papers_models = db__get_table("mapping_papers_models"),
-    mapping_papers_datasets = db__get_table("mapping_papers_datasets"),
-    mapping_datasets_features = db__get_table("mapping_datasets_features"),
-    mapping_models_features = db__get_table("mapping_models_features"),
-    mapping_models_datasets = db__get_table("mapping_models_datasets")
   )
   auth <- reactiveValues(
     # Updated in `hndl__sc__auth_completed`

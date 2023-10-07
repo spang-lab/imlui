@@ -1,6 +1,6 @@
 init__rv_dataset <- function(ses) {
   trace_func_entry("init__rv_dataset")
-  df <- ses$rv$tbl$datasets
+  df <- db__get_table("datasets")
   ids <- init__rv__accessible_dataset_ids(ses$rv)
   symbols <- `names<-`(df[ids, "symbol"], ids)
   displaynames <- `names<-`(df[ids, "name"], ids)
@@ -16,7 +16,7 @@ init__rv_dataset <- function(ses) {
 
 init__rv_model <- function(ses) {
   trace_func_entry("init__rv_dataset")
-  dfs <- ses$rv$tbl$models
+  dfs <- db__get_table("models")
   ids <- init__rv__get_accessible_model_ids(ses$rv)
   symbols <- `names<-`(dfs[ids, "symbol"], ids)
   displaynames <- `names<-`(dfs[ids, "name"], ids)
@@ -32,14 +32,15 @@ init__rv__accessible_dataset_ids <- function(rv) {
   trace_func_entry()
   uid <- rv$user$id
   gids <- rv$user$group_ids
-  ids_valid <- rv$tbl$datasets[nchar(rv$tbl$datasets$symbol) > 0, "id"]
+  d <- db__get_table("datasets")
+  ids_valid <- d[nchar(d$symbol) > 0, "id"]
   if (is.null(rv$user$id)) {
     stop("rv$user$id must not be null")
   } else if (is.null(rv$user$group_ids)) {
     stop("rv$user$group_ids must not be null")
   }
   # Group permissions
-  mgd <- rv$tbl$mapping_groups_datasets
+  mgd <- db__get_table("mapping_groups_datasets")
   idx_grp <- mgd$group_id %in% gids
   idx_ign <- mgd$permission_id == "ignore"
   idx_grp_ign <- idx_grp & idx_ign
@@ -52,7 +53,7 @@ init__rv__accessible_dataset_ids <- function(rv) {
     ids_grp_use <- mgd$dataset_id[idx_grp_use & (!idx_grp_ign)]
   }
   # User permissions
-  mud <- rv$tbl$mapping_users_datasets
+  mud <- db__get_table("mapping_users_datasets")
   idx_usr <- mud$user_id == uid
   idx_use <- mud$permission_id %in% c("select", "use", "download")
   idx_ign <- mud$permission_id == "ignore"
@@ -70,14 +71,15 @@ init__rv__get_accessible_model_ids <- function(rv) {
   trace_func_entry()
   uid <- rv$user$id
   gids <- rv$user$group_ids
-  ids_valid <- rv$tbl$models[nchar(rv$tbl$models$symbol) > 0, "id"]
+  m <- db__get_table("models")
+  ids_valid <- m[nchar(m$symbol) > 0, "id"]
   if (is.null(rv$user$id)) {
     stop("rv$user$id must not be null")
   } else if (is.null(rv$user$group_ids)) {
     stop("rv$user$group_ids must not be null")
   }
   # Group permissions
-  mgm <- rv$tbl$mapping_groups_models
+  mgm <- db__get_table("mapping_groups_models")
   idx_grp <- mgm$group_id %in% gids
   idx_ign <- mgm$permission_id == "ignore"
   idx_grp_ign <- idx_grp & idx_ign
@@ -90,7 +92,7 @@ init__rv__get_accessible_model_ids <- function(rv) {
     ids_grp_use <- mgm$model_id[idx_grp_use & (!idx_grp_ign)]
   }
   # User permissions
-  mum <- rv$tbl$mapping_users_models
+  mum <- db__get_table("mapping_users_models")
   idx_usr <- mum$user_id == uid
   idx_use <- mum$permission_id %in% c("select", "use", "download")
   idx_ign <- mum$permission_id == "ignore"
