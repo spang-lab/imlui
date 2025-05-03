@@ -18,5 +18,5 @@ db__update(tbl, col, val, id)
 \description{
 This functions upates a single value in a table that already
 exists. The given colum and id must also exist. Translated to R, this
-function does the same as \verb{idx <- which(tbl$id == id); tbl[idx, col] <- val}
+function does the same as \verb{idx <- which(tbl$id == id), tbl[idx, col] <- val}
 }

@@ -104,7 +104,7 @@ init__hndl__btn <- function(ses) {
     }
   )
 
-  return(toscutil::function_locals)
+  return(toscutil::function_locals())
 }
 
 

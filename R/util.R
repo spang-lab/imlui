@@ -244,8 +244,8 @@ fetch_rddb <- function(filebase, key = NULL) {
 
 util__in_devmode <- function() {
   pkg_dir <- dirname(system.file("DESCRIPTION", package = "imlui"))
-  util__in_devmode <- !file.exists(file.path(pkg_dir, "R", "imlui.rdb"))
-  return(util__in_devmode)
+  in_devmode <- !file.exists(file.path(pkg_dir, "R", "imlui.rdb"))
+  return(in_devmode)
 }
 
 

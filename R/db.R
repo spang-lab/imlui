@@ -30,6 +30,7 @@ db__connect <- function(force_recreate = FALSE) {
 
 # Helper function for [db__connect()].
 db__connect_to_sqlite_dbms <- function(force_recreate) {
+  trace_func_entry("db__connect_to_sqlite_dbms")
   init_required <- if (util__in_devmode() && force_recreate) TRUE else FALSE
   if (!file.exists(penv$imlui_config$dbms$filepath)) {
     infomsg("File", penv$imlui_config$dbms$filepath, "does not exist.")
@@ -56,6 +57,7 @@ db__connect_to_sqlite_dbms <- function(force_recreate) {
 
 # Helper function for [db__connect()].
 db__connect_to_postgres_dbms <- function() {
+  trace_func_entry("db__connect_to_postgres_dbms")
   penv$db <- DBI::dbConnect(
     drv = RPostgres::Postgres(),
     host = penv$imlui_config$dbms$hostname,
@@ -95,6 +97,41 @@ db__is_connected <- function() {
 }
 
 
+## db__init ####################################################################
+
+# db__col_types <- list(
+#   users =                     list(id = c("TEXT", "PRIMARY KEY"),    display_name = c("TEXT")    , "password" TEXT, "avatar_url" TEXT, "github_id" INTEGER, "gitlab_id" INTEGER, "google_id" INTEGER, "spanglab_gitlab_id" INTEGER, "spanglab_auth_id" INTEGER), 
+#   models =                    list(id = c("TEXT", "PRIMARY KEY"),    name = c("TEXT")     NOT NULL, "modeltype_id"  TEXT NOT NULL, "symbol" TEXT, "package" TEXT, "modeltype" TEXT, "m" INTEGER), 
+#   datasets =                  list(id = c("TEXT", "PRIMARY KEY"),    name = c("TEXT")     NOT NULL, "symbol" TEXT, "package" TEXT, "transpose" TEXT, "n" INTEGER, "m" INTEGER), 
+#   papers =                    list(id = c("TEXT", "PRIMARY KEY"),    year = c("INTEGER")    , "author" TEXT, "title" TEXT, "journal" TEXT, "volume" TEXT, "number" TEXT, "pages" TEXT, "issn" TEXT, "doi" TEXT, "url" TEXT), 
+#   settings =                  list(id = c("TEXT", "PRIMARY KEY"),    name = c("TEXT")    , "description" TEXT), 
+#   appstate =                  list(id = c("INTEGER", "PRIMARY KEY"), user_id = c("TEXT")     NOT NULL, "resource_id" TEXT NOT NULL, "resource_value" TEXT), 
+#   modeltypes =                list(id = c("TEXT", "PRIMARY KEY"),    name = c("TEXT")    , "description" TEXT), 
+#   datatypes =                 list(id = c("TEXT", "PRIMARY KEY"),    name = c("TEXT")    , "description" TEXT), 
+#   platforms =                 list(id = c("TEXT", "PRIMARY KEY"),    name = c("TEXT")    , "description" TEXT), 
+#   mapping_users_groups =      list(id = c("INTEGER", "PRIMARY KEY"), user_id = c("TEXT")     NOT NULL, "group_id" TEXT NOT NULL), 
+#   mapping_users_settings =    list(id = c("INTEGER", "PRIMARY KEY"), user_id = c("TEXT")     NOT NULL, "setting_id" TEXT NOT NULL, "value" TEXT NOT NULL), 
+#   mapping_users_models =      list(id = c("INTEGER", "PRIMARY KEY"), user_id = c("TEXT")    , "model_id" TEXT, "permission_id" TEXT), 
+#   mapping_users_datasets =    list(id = c("INTEGER", "PRIMARY KEY"), user_id = c("TEXT")     NOT NULL, "dataset_id" TEXT NOT NULL, "permission_id" TEXT NOT NULL), 
+#   mapping_users_resources =   list(id = c("INTEGER", "PRIMARY KEY"), user_id = c("TEXT")     NOT NULL, "resource_id" TEXT NOT NULL, "permission_id" TEXT NOT NULL), 
+#   mapping_users_sessions =    list(id = c("INTEGER", "PRIMARY KEY"), user_id = c("TEXT")     NOT NULL, "session_id" TEXT NOT NULL, "login_time" TEXT NOT NULL, "expiry_time" TEXT NOT NULL), 
+#   mapping_groups_settings =   list(id = c("INTEGER", "PRIMARY KEY"), group_id = c("TEXT")     NOT NULL, "setting_id" TEXT NOT NULL, "value" TEXT NOT NULL), 
+#   mapping_groups_models =     list(id = c("INTEGER", "PRIMARY KEY"), group_id = c("TEXT")    , "model_id" TEXT, "permission_id" TEXT), 
+#   mapping_groups_datasets =   list(id = c("INTEGER", "PRIMARY KEY"), group_id = c("TEXT")     NOT NULL, "dataset_id" TEXT NOT NULL, "permission_id" TEXT NOT NULL), 
+#   mapping_groups_resources =  list(id = c("INTEGER", "PRIMARY KEY"), group_id = c("TEXT")     NOT NULL, "resource_id" TEXT NOT NULL, "permission_id" TEXT NOT NULL), 
+#   mapping_papers_models =     list(id = c("INTEGER", "PRIMARY KEY"), paper_id = c("TEXT")     NOT NULL, "model_id" TEXT NOT NULL, "comment" TEXT), 
+#   mapping_papers_datasets =   list(id = c("INTEGER", "PRIMARY KEY"), paper_id = c("TEXT")     NOT NULL, "dataset_id" TEXT NOT NULL, "comment" TEXT), 
+#   mapping_datasets_features = list(id = c("INTEGER", "PRIMARY KEY"), dataset_id = c("TEXT")     NOT NULL, "dataset_feature_id" TEXT NOT NULL, "global_feature_id" TEXT NOT NULL), 
+#   mapping_models_features =   list(id = c("INTEGER", "PRIMARY KEY"), model_id = c("TEXT")     NOT NULL, "model_feature_id" TEXT NOT NULL, "global_feature_id" TEXT NOT NULL), 
+#   mapping_models_classes =    list(id = c("INTEGER", "PRIMARY KEY"), model_id = c("TEXT")     NOT NULL, "class_id" TEXT NOT NULL), 
+#   mapping_models_datasets =   list(id = c("INTEGER", "PRIMARY KEY"), model_id = c("TEXT")     NOT NULL, "dataset_id" TEXT NOT NULL),
+# )
+
+# Define Minimal DB, incl. tables, columns, column types and rows.
+# Check if all tables are there
+# For each table: check if all columns are there
+# For each table: check if all required rows are there
+
 ## db__get #####################################################################
 
 
@@ -121,6 +158,7 @@ db__get_column <- function(col, tbl) {
 #' db__get_colnames("users")
 #' }
 db__get_colnames <- function(tbl) {
+  trace_func_entry("db__get_colnames")
   return(DBI::dbListFields(penv$db, tbl))
 }
 
@@ -133,6 +171,7 @@ db__get_colnames <- function(tbl) {
 #' db__get_table("users")
 #' }
 db__get_table <- function(tbl) {
+  trace_func_entry("db__get_table")
   df <- DBI::dbReadTable(penv$db, tbl)
   rownames(df) <- df$id
   return(df)
@@ -140,6 +179,7 @@ db__get_table <- function(tbl) {
 
 
 db__get_table_names <- function(tbl) {
+  trace_func_entry("db__get_table_names")
   return(DBI::dbListTables(penv$db))
 }
 
@@ -149,6 +189,7 @@ db__get_table_names <- function(tbl) {
 #' @description Get valid, i.e. not yet expired, cookies from Database.
 #' @param expiry Expiry date in days
 db__get_valid_cookies <- function(expiry = 7) {
+  trace_func_entry("db__get_valid_cookies")
   expiry_date <- as.character(lubridate::now() - lubridate::days(expiry))
   df <- db__execute(
     query = "SELECT * FROM mapping_users_sessions WHERE login_time > ?",
@@ -169,7 +210,7 @@ db__get_valid_cookies <- function(expiry = 7) {
 #' @param n Maximum number of models to return
 db__get__default_model_selection <- function(ses, choices = NULL, n = NULL) {
   trace_func_entry("db__get__default_model_selection")
-  mgs <- ses$rv$tbl$mapping_groups_settings
+  mgs <- db__get_table("mapping_groups_settings")
   idx <- which(mgs$group_id == "public" & mgs$setting_id == "models")
   if (util__is_none(mgs[idx, "value"])) {
     sel <- NULL
@@ -187,7 +228,7 @@ db__get__default_model_selection <- function(ses, choices = NULL, n = NULL) {
 
 db__get__default_dataset_selection <- function(ses, choices = NULL, n = NULL) {
   trace_func_entry("db__get__default_dataset_selection")
-  mgs <- ses$rv$tbl$mapping_groups_settings
+  mgs <- db__get_table("mapping_groups_settings")
   idx <- which(mgs$group_id == "public" & mgs$setting_id == "datasets")
   if (util__is_none(mgs[idx, "value"])) {
     sel <- NULL
@@ -232,7 +273,7 @@ db__get__dataset_choices <- function(ses, model_ids = NULL) {
 
 db__get__compatible_model_ids <- function(ses, dataset_ids) {
   trace_func_entry("db__get__compatible_model_ids")
-  mmd <- ses$rv$tbl$mapping_datasets_models
+  mmd <- db__get_table("mapping_datasets_models")
   idx <- which(mmd$dataset_id %in% dataset_ids)
   model_ids <- unique(mmd[idx, "model_id"])
   return(model_ids)
@@ -241,7 +282,7 @@ db__get__compatible_model_ids <- function(ses, dataset_ids) {
 
 db__get__compatible_dataset_ids <- function(ses, model_ids) {
   trace_func_entry("db__get__compatible_dataset_ids")
-  mmd <- ses$rv$tbl$mapping_models_datasets
+  mmd <- db__get_table("mapping_models_datasets")
   idx <- which(mmd$model_id %in% model_ids)
   dataset_ids <- unique(mmd[idx, "dataset_id"])
   return(dataset_ids)
@@ -250,15 +291,16 @@ db__get__compatible_dataset_ids <- function(ses, model_ids) {
 
 ## db__set #####################################################################
 
-#' @title Update a single value in a table 
+#' @title Update a single value in a table
 #' @description This functions upates a single value in a table that already
 #' exists. The given colum and id must also exist. Translated to R, this
-#' function does the same as `idx <- which(tbl$id == id); tbl[idx, col] <- val`
+#' function does the same as `idx <- which(tbl$id == id), tbl[idx, col] <- val`
 #' @param tbl Name of table that should be updated
 #' @param col Name of column that should be updated
 #' @param val New Value
 #' @param id ID of row that should be updated
 db__update <- function(tbl, col, val, id) {
+  trace_func_entry("db__update")
   query <- paste("UPDATE ", tbl, " SET ", col, " = ? WHERE id = ?")
   params <- list(val, id)
   db__execute(query, params)
@@ -275,6 +317,7 @@ db__update <- function(tbl, col, val, id) {
 #' set_login_cookie(ses, user_id = "max", session_id = "asdf1234")
 #' }
 db__insert_cookie <- function(user_id, session_id) {
+  trace_func_entry("db__insert_cookie")
   x <- data.frame(
     user_id = user_id,
     session_id = session_id,
@@ -286,6 +329,7 @@ db__insert_cookie <- function(user_id, session_id) {
 
 
 db__add_user <- function(user_id, display_name, password) {
+  trace_func_entry("db__add_user")
   x <- data.frame(
     user_id = user_id,
     display_name = display_name,
@@ -311,6 +355,7 @@ db__add_user <- function(user_id, display_name, password) {
 #' execute(query, params)
 #' }
 db__execute <- function(query, params = NULL) {
+  trace_func_entry("db__execute")
   # Execute SQL query. Examples:
   if (grepl("SELECT", query)) {
     invisible(DBI::dbGetQuery(penv$db, query, params = params))
@@ -362,7 +407,7 @@ db__tables <- c(
   "mapping_models_datasets"
 )
 
-# # Auto generated and not tested
+# Other DBI functions
 # db__appendTable <- function(...) DBI::dbAppendTable(penv$db, ...)
 # db__canConnect <- function(...) DBI::dbCanConnect(penv$db)
 # db__createTable <- function(...) DBI::dbCreateTable(penv$db)

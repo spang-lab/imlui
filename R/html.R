@@ -22,9 +22,15 @@ html__tab__settings <- function(ses,
                                 cols_ignore = c(),
                                 cols_show = "_all") {
 
-  tbl <- db__get_table(tbl_name)
-  tbl_id <- paste0("tbl_", tbl_name)
-  tbl_edit_id <- paste0(tbl_id, "_cell_edit") # 1)
+  trace_func_entry("html__tab__settings")
+
+  ses$rv$tbl[[tbl_name]] <- tbl <- db__get_table(tbl_name)
+  tbl_id <- paste0("tbl_", tbl_name)           # tbl_datasets
+  tbl_edit_id <- paste0(tbl_id, "_cell_edit")  # tbl_datasets_cell_edit 1)
+  tbl_edit_hist_id <- paste0(tbl_id, "_edit_hist")  # tbl_datasets_hist
+  btn_reset_id <- paste0("btn_reset_", tbl_id) # btn_reset_tbl_datasets
+  btn_save_id <- paste0("btn_save_", tbl_id)   # btn_save_tbl_datasets
+  btn_new_id <- paste0("btn_new_", tbl_id)     # btn_new_tbl_datasets
   tbl_cols <- colnames(tbl)
   # 1) The DT javascript will update `input[[tbl_edit_id]]` each time
   # the table is updated by the website user. This ID is hardcoded in the DT
@@ -39,32 +45,79 @@ html__tab__settings <- function(ses,
         p("Double click a cell to edit it. Accept changes by clicking somewhere else. Reload the page to use the updated values."),
         DT::DTOutput(outputId = tbl_id)
       )
+    ),
+    fluidRow(
+      column(
+        width = 12,
+        shiny::actionButton(inputId = btn_reset_id, label = "Reset changes"),
+        shiny::actionButton(inputId = btn_save_id, label = "Save changes"),
+        shiny::actionButton(inputId = btn_new_id, label = "Add row")
+      )
     )
   )
 
-  # Create reactive for displaying Table as HTML element
-  ses$output[[tbl_id]] <- render__tbl(
-    expr = tbl,
-    show = cols_show,
-    ignore = cols_ignore
-  )
-
   # Create reactive for handling Table edits
-  if (tbl_name %in% ses$hndl$tbl) {
-    warnmsg(paste0("ses$hndl$tbl$", tbl_name, " exists already."))
+  if (tbl_edit_id %in% names(ses$hndl$tbl)) {
+    warnmsg(paste0("ses$hndl$tbl$", tbl_edit_id, " exists already."))
   } else {
     ses$hndl$tbl[[tbl_edit_id]] <- observeEvent(
       eventExpr = ses$input[[tbl_edit_id]],
+      # CONTINUE HERE
+      # Editing schreibt nicht direkt in die Datenbank, sondern erstmal nur
+      #   in die Tabelle, d.h. `ses$tbl[[tbl_name]]`. Vorher wird ein Backup
+      #   der Tabelle angelegt `ses$rv$tbl$bak[[tbl_name]]`.
+      # Bei `Reset changes` wird die Tabelle neu anhand des Backups
+      #   initialisiert  `ses$rv$tbl[[tbl_name]] <-
+      #   ses$rv$tbl$bak[[tbl_name]]`.
+      # Bei `submit changes` wird die DB anhand der Änderungen beschrieben
+      # Bei `add row` wird eine neue Zeile angelegt
       handlerExpr = {
         row_nr <- ses$input[[tbl_edit_id]]$row # rows start counting at 1
         col_nr <- ses$input[[tbl_edit_id]]$col + 1 # cols start counting at 0
         col_name <- tbl_cols[col_nr]
         id <- tbl[row_nr, "id"]
         val <- ses$input[[tbl_edit_id]]$value
-        infomsg("UPDATE", tbl_name, "SET", col_name, "=", val, "WHERE id =", id)
-        db__update(tbl = tbl_name, col = col_name, val = val, id = id)
+        infomsg(sprintf(
+          "ses$rv$tbl[[%s]][%i, %i] <- '%s'",
+          tbl_name, row_nr, col_nr, val
+        ))
+        ses$rv$tbl[[tbl_name]][row_nr, col_nr] <- val
       }
     )
+  }
+
+  # Create reactive for handling table resets
+  if (btn_reset_id %in% names(ses$hndl$btn)) {
+    warnmsg(paste0("ses$hndl$btn$", tbl_edit_hist_id, " exists already."))
+  } else {
+    ses$hndl$btn <- observeEvent(
+      eventExpr = ses$input[[btn_reset_id]],
+      handlerExpr = {
+        infomsg("Resetting", tbl_name)
+        infomsg("ses$input[[btn_reset_id]]:", ses$input[[btn_reset_id]])
+        ses$output[[tbl_id]] <- render__tbl(
+          expr = tbl,
+          show = cols_show,
+          ignore = cols_ignore
+        )
+      },
+      ignoreNULL = FALSE,
+      ignoreInit = TRUE
+    )
+  }
+
+  # Create reactive for handling table saves
+  if (btn_save_id %in% names(ses$hndl$btn)) {
+    warnmsg(paste0("ses$hndl$btn$", tbl_edit_hist_id, " exists already."))
+  } else {
+    # TODO
+  }
+
+  # Create reactive for handling adding of new rows to table
+  if (btn_new_id %in% names(ses$hndl$btn)) {
+    warnmsg(paste0("ses$hndl$btn$", tbl_edit_hist_id, " exists already."))
+  } else {
+    # TODO
   }
 
   return(tab)

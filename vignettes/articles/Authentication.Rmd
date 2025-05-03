@@ -1,0 +1,53 @@
+---
+title: Authentication
+---
+
+# Authentication
+
+IMLUI supports classic user/password authentication as well as authentication via [OpenID Connect](Technologies#openid-connect) or [OAuth 2.0](Technologies#oauth20), i.e. the option to sign in with Google/Github/Facebook etc. Currently supported authentication providers are:
+
+* [github.de](https://github.com/)
+
+Soon to be added Authentication providers are:
+
+* [auth.spang-lab.de](https://auth.spang-lab.de/)
+* [gitlab.spang-lab.de](https://gitlab.spang-lab.de/)
+* [github.de](https://github.com/)
+* [google.com](https://www.google.com/)
+* [facebook.com](https://www.facebook.com/)
+* [twitter.com](https://twitter.com/)
+
+Should you opt for authentication via *OpenID Connect*/*OAuth 2.0*, at least a unique ID will be retrieved from the respective identity provider. If available, your name, email and profile picture will be retrieved as well.
+
+# Internal Authorization
+
+**🛠️TODO**: this section is outdated.
+
+By default, user authorization, i.e. the management of user permissions, is handled by IMLUI directly. For information on how to configure an external identity provider as authorization source, please refer to section [External Authorization](#external-authorization). IMLUI's internal authorization mechanism works as follows:
+
+1. For each user an entry is created in table `users` (1) after the user's first login.
+2. Permission to access specific models, datasets and/or services, is stored as a entry in tables `mapping_groups_models`.
+
+Example: it is possible to grant `use` (3) access for dataset `Lenz_2008_train` to groups `spang-lab-phd-students` and `spang-lab-master-students` and to grant `download` access to group `imlui-admins` and user `uid12345`.
+
+(1): Columns of table `users` are e.g. `user_id`, `google_id`, `github_id`, `email`, `password`, `group_ids` and `display_name`\
+(2): Columns of table `dataset_permissions`/`resource_permissions` are e.g.`dataset_id`, `resource_id` and `permission_id`. Possible values for `permission_id` are: `list`, `view` and `download`.\
+(3): Side-note: there is no `write` or `change` permissions, because datasets are immutable objects. If anything has to be changed, that new dataset must obtain a different ID.
+
+# External Authorization
+
+**🛠️TODO**: the behaviour described in this section is not implemented yet.
+
+IMLUI can be configured to use an external identity provider such as [auth.spang-lab.de](https://auth.spang-lab.de/) for authorization. This is implemented as follows: when user `uidX` logs in via identity provider `authY.com`, then
+
+1. All groups `G={g1, g2, ...}` assigned to `uidX` are retrieved from `authY.com`
+2. New rows
+   + `group_id=g1, user_id=uidX, granted_by=authY.com`
+   + `group_id=g2, user_id=uidX, granted_by=authY.com`
+   + `...`
+   are added to table `groups`, if they don't exist yet.
+3. All rows matching `group_id=.*, user_id=uidX, granted_by=authY.com` are retrieved from table `users`. If any `group_id` is found, that is no longer an element of `G`, those entries are removed.
+
+This way, access to resources can be given to groups defined by `authY.com` and whenever a user signs in via `authY.com` he automatically is added to those groups (or removed from them).
+
+To enable authorization via an external identity provider, login as admin and go to `Settings` > `Authorization` > `Enabled external authorization providers` and tick the checkbox of the external identity provider you want to enable.

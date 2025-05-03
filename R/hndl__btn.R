@@ -17,7 +17,7 @@ hndl__btn__login_github <- function(ses) {
 
 hndl__btn__login <- function(ses) {
   trace_func_entry()
-  udf <- ses$rv$tbl$users
+  udf <- db__get_table("users")
   uid_entered <- ses$input$login_user_name
   upw_entered <- ses$input$login_password
   # browser()

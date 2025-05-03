@@ -53,8 +53,8 @@ hndl__sc__login_cookie <- function(ses) { # run when_valid_cookie_is_present
 hndl__sc__auth_completed <- function(ses) {
   trace_func_entry("hndl__sc__auth_completed")
   u_id <- if (is.null(ses$rv$user$id)) "public" else ses$rv$user$id
-  u_df <- ses$rv$tbl$users
-  mug_df <- ses$rv$tbl$mapping_users_groups
+  u_df <- db__get_table("users")
+  mug_df <- db__get_table("mapping_users_groups")
   u_row <- u_df[which(u_df$id == ses$rv$user$id), ]
   g_ids <- mug_df$group_id[mug_df$user_id == u_id]
   g_ids <- unique(c(g_ids, "public"))
